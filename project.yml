@@ -1,0 +1,26 @@
+name: IndieMap
+options:
+  bundleIdPrefix: com.indiemap
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+targets:
+  IndieMap:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources/IndieMap
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.indiemap.app
+        INFOPLIST_FILE: Sources/IndieMap/Info.plist
+schemes:
+  IndieMap:
+    build:
+      targets:
+        IndieMap: all
+    run:
+      config: Debug
+    archive:
+      config: Release
