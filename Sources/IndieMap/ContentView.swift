@@ -14,8 +14,13 @@ struct ContentView: View {
             )
             .ignoresSafeArea()
 
-            WebView(urlString: "http://192.168.2.41:3010/fr")
+            #if DEBUG
+            WebView(urlString: "http://localhost:3010/fr")
                 .ignoresSafeArea()
-        }
+            #else
+            WebView(urlString: "https://indie-map.vercel.app/fr")
+                .ignoresSafeArea()
+            #endif
+}
     }
 }
