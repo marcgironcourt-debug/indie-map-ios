@@ -32,7 +32,10 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Indie Map utilise votre position pour afficher les lieux autour de vous.</string>
 	<key>UILaunchScreen</key>
-	<dict/>
+		<dict>
+			<key>UIColorName</key>
+			<string>LaunchBackground</string>
+		</dict>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarHidden</key>

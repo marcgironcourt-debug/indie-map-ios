@@ -63,7 +63,11 @@ struct WebView: UIViewRepresentable {
         webView.backgroundColor = UIColor.clear
         webView.scrollView.backgroundColor = UIColor.clear
 
-        guard let url = URL(string: urlString) else { return webView }
+        if #available(iOS 15.0, *) {
+            webView.underPageBackgroundColor = UIColor(red: 0.06, green: 0.06, blue: 0.08, alpha: 1.0)
+        }
+
+guard let url = URL(string: urlString) else { return webView }
         webView.load(URLRequest(url: url))
         return webView
     }
