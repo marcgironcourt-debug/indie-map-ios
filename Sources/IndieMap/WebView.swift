@@ -29,6 +29,49 @@ struct WebView: UIViewRepresentable {
 
     final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
 
+        private func isInternal(_ url: URL, webView: WKWebView) -> Bool {
+            guard let h = url.host?.lowercased(), !h.isEmpty else { return false }
+            if h == "indie-map.vercel.app" { return true }
+            if let cur = webView.url?.host?.lowercased(), cur == h { return true }
+            return false
+        }
+
+        func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+            if navigationAction.targetFrame == nil, let url = navigationAction.request.url {
+                if url.scheme?.lowercased() == "http" || url.scheme?.lowercased() == "https" {
+                    if isInternal(url, webView: webView) {
+                        webView.load(URLRequest(url: url))
+                    } else {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+            return nil
+        }
+
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler:  (WKNavigationActionPolicy) -> Void) {
+            guard let url = navigationAction.request.url else { decisionHandler(.allow); return }
+            let scheme = (url.scheme ?? "").lowercased()
+
+            if scheme == "mailto" || scheme == "tel" {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                decisionHandler(.cancel)
+                return
+            }
+
+            if (scheme == "http" || scheme == "https") && navigationAction.navigationType == .linkActivated {
+                if isInternal(url, webView: webView) {
+                    decisionHandler(.allow)
+                } else {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    decisionHandler(.cancel)
+                }
+                return
+            }
+
+            decisionHandler(.allow)
+        }
+
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("WKWebView didFinish:", webView.url?.absoluteString ?? "<nil>")
         }
@@ -76,6 +119,7 @@ struct WebView: UIViewRepresentable {
         let webView = WKWebView(frame: .zero, configuration: config)
 
         webView.uiDelegate = context.coordinator
+        webView.navigationDelegate = context.coordinator
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.isOpaque = false
         webView.backgroundColor = .clear
