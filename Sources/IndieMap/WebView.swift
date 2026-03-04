@@ -27,7 +27,103 @@ final class GeoPermission: NSObject, CLLocationManagerDelegate {
 struct WebView: UIViewRepresentable {
     let urlString: String
 
-    final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
+    
+final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
+
+        private func topController() -> UIViewController? {
+            UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first(where: { $0.isKeyWindow })?
+                .rootViewController
+        }
+
+        private func isAppleMapsLink(_ url: URL) -> Bool {
+            (url.host ?? "").lowercased() == "maps.apple.com"
+        }
+
+        private func parseAppleMapsDestination(_ url: URL) -> (lat: Double?, lng: Double?, query: String?) {
+            guard let c = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return (nil, nil, nil) }
+            let items = c.queryItems ?? []
+            func get(_ name: String) -> String {
+                for it in items {
+                    if it.name.lowercased() == name.lowercased() { return (it.value ?? "").trimmingCharacters(in: .whitespacesAndNewlines) }
+                }
+                return ""
+            }
+            let daddr = get("daddr")
+            let q = get("q")
+            let query = get("query")
+            let raw = !daddr.isEmpty ? daddr : (!q.isEmpty ? q : (!query.isEmpty ? query : ""))
+            if raw.isEmpty { return (nil, nil, nil) }
+            let parts = raw.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            if parts.count == 2, let la = Double(parts[0]), let ln = Double(parts[1]) {
+                return (la, ln, raw)
+            }
+            return (nil, nil, raw)
+        }
+
+        private func presentNavigationChooser(_ appleURL: URL) {
+            guard let root = topController() else {
+                UIApplication.shared.open(appleURL, options: [:], completionHandler: nil)
+                return
+            }
+
+            let parsed = parseAppleMapsDestination(appleURL)
+            let lat = parsed.lat
+            let lng = parsed.lng
+            let query = parsed.query
+
+            var actions: [(String, URL)] = [("Plans", appleURL)]
+
+            if let q = query, !q.isEmpty {
+                if let u = URL(string: "comgooglemaps://?daddr=" + (q.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")),
+                   UIApplication.shared.canOpenURL(u) {
+                    actions.append(("Google Maps", u))
+                } else if let uw = URL(string: "https://www.google.com/maps/dir/?api=1&destination=" + (q.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")) {
+                    actions.append(("Google Maps", uw))
+                }
+            }
+
+            if let la = lat, let ln = lng {
+                let ll = "\(la),\(ln)"
+                if let u = URL(string: "waze://?ll=" + (ll.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") + "&navigate=yes"),
+                   UIApplication.shared.canOpenURL(u) {
+                    actions.append(("Waze", u))
+                } else if let uw = URL(string: "https://waze.com/ul?ll=" + (ll.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") + "&navigate=yes") {
+                    actions.append(("Waze", uw))
+                }
+            } else if let q = query, !q.isEmpty {
+                if let u = URL(string: "waze://?q=" + (q.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") + "&navigate=yes"),
+                   UIApplication.shared.canOpenURL(u) {
+                    actions.append(("Waze", u))
+                } else if let uw = URL(string: "https://waze.com/ul?q=" + (q.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") + "&navigate=yes") {
+                    actions.append(("Waze", uw))
+                }
+            }
+
+            if actions.count == 1 {
+                UIApplication.shared.open(appleURL, options: [:], completionHandler: nil)
+                return
+            }
+
+            let sheet = UIAlertController(title: "Itinéraire", message: nil, preferredStyle: .actionSheet)
+            for (t, u) in actions {
+                sheet.addAction(UIAlertAction(title: t, style: .default) { _ in
+                    UIApplication.shared.open(u, options: [:], completionHandler: nil)
+                })
+            }
+            sheet.addAction(UIAlertAction(title: "Annuler", style: .cancel))
+
+            if let pop = sheet.popoverPresentationController {
+                pop.sourceView = root.view
+                pop.sourceRect = CGRect(x: root.view.bounds.midX, y: root.view.bounds.maxY - 8, width: 1, height: 1)
+                pop.permittedArrowDirections = []
+            }
+
+            root.present(sheet, animated: true)
+        }
+
 
         private func isInternal(_ url: URL, webView: WKWebView) -> Bool {
             guard let h = url.host?.lowercased(), !h.isEmpty else { return false }
@@ -39,6 +135,11 @@ struct WebView: UIViewRepresentable {
         func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
             if navigationAction.targetFrame == nil, let url = navigationAction.request.url {
                 if url.scheme?.lowercased() == "http" || url.scheme?.lowercased() == "https" {
+                    if isAppleMapsLink(url) {
+                        presentNavigationChooser(url)
+                        return nil
+                    }
+
                     if isInternal(url, webView: webView) {
                         webView.load(URLRequest(url: url))
                     } else {
@@ -53,6 +154,12 @@ struct WebView: UIViewRepresentable {
             guard let url = navigationAction.request.url else { decisionHandler(.allow); return }
             let scheme = (url.scheme ?? "").lowercased()
 
+            if (scheme == "http" || scheme == "https") && isAppleMapsLink(url) {
+                presentNavigationChooser(url)
+                decisionHandler(.cancel)
+                return
+            }
+
             if scheme == "mailto" || scheme == "tel" {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 decisionHandler(.cancel)
@@ -60,6 +167,12 @@ struct WebView: UIViewRepresentable {
             }
 
             if (scheme == "http" || scheme == "https") && navigationAction.navigationType == .linkActivated {
+                if isAppleMapsLink(url) {
+                    presentNavigationChooser(url)
+                    decisionHandler(.cancel)
+                    return
+                }
+
                 if isInternal(url, webView: webView) {
                     decisionHandler(.allow)
                 } else {
