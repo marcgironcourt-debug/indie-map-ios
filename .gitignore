@@ -3,3 +3,4 @@
 *.xccheckout
 xcuserdata/
 DerivedData/
+.certs/
