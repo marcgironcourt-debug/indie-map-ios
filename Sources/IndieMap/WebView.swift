@@ -3,6 +3,48 @@ import WebKit
 import UIKit
 import CoreLocation
 
+final class NavigationChooserViewController: UITableViewController {
+    private let actions: [(String, URL)]
+
+    init(actions: [(String, URL)]) {
+        self.actions = actions
+        super.init(style: .insetGrouped)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Itinéraire"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Annuler", style: .done, target: self, action: #selector(close))
+    }
+
+    @objc private func close() {
+        dismiss(animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        actions.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.text = actions[indexPath.row].0
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let u = actions[indexPath.row].1
+        dismiss(animated: true) {
+            UIApplication.shared.open(u, options: [:], completionHandler: nil)
+        }
+    }
+}
+
+
 final class GeoPermission: NSObject, CLLocationManagerDelegate {
     static let shared = GeoPermission()
     private let manager = CLLocationManager()
@@ -107,21 +149,15 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
                 return
             }
 
-            let sheet = UIAlertController(title: "Itinéraire", message: nil, preferredStyle: .actionSheet)
-            for (t, u) in actions {
-                sheet.addAction(UIAlertAction(title: t, style: .default) { _ in
-                    UIApplication.shared.open(u, options: [:], completionHandler: nil)
-                })
+            let vc = NavigationChooserViewController(actions: actions)
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .pageSheet
+            if let sh = nav.sheetPresentationController {
+                sh.detents = [.medium(), .large()]
+                sh.prefersGrabberVisible = true
+                sh.largestUndimmedDetentIdentifier = nil
             }
-            sheet.addAction(UIAlertAction(title: "Annuler", style: .cancel))
-
-            if let pop = sheet.popoverPresentationController {
-                pop.sourceView = root.view
-                pop.sourceRect = CGRect(x: root.view.bounds.midX, y: root.view.bounds.maxY - 8, width: 1, height: 1)
-                pop.permittedArrowDirections = []
-            }
-
-            root.present(sheet, animated: true)
+            root.present(nav, animated: true)
         }
 
 
