@@ -27,7 +27,25 @@ final class GeoPermission: NSObject, CLLocationManagerDelegate {
 struct WebView: UIViewRepresentable {
     let urlString: String
 
-    final class Coordinator: NSObject, WKUIDelegate {
+    final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
+
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            print("WKWebView didFinish:", webView.url?.absoluteString ?? "<nil>")
+        }
+
+        func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+            print("WKWebView didFailProvisionalNavigation:", error.localizedDescription)
+        }
+
+        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            print("WKWebView didFail:", error.localizedDescription)
+        }
+
+        func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+            print("WKWebView webContentProcessDidTerminate")
+        }
+
+
         func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
             guard let root = UIApplication.shared.connectedScenes
                 .compactMap({ $0 as? UIWindowScene })
@@ -60,12 +78,9 @@ struct WebView: UIViewRepresentable {
         webView.uiDelegate = context.coordinator
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.isOpaque = false
-        webView.backgroundColor = UIColor.clear
-        webView.scrollView.backgroundColor = UIColor.clear
+        webView.backgroundColor = .clear
+        webView.scrollView.backgroundColor = .clear
 
-        if #available(iOS 15.0, *) {
-            webView.underPageBackgroundColor = UIColor(red: 0.06, green: 0.06, blue: 0.08, alpha: 1.0)
-        }
 
 guard let url = URL(string: urlString) else { return webView }
         webView.load(URLRequest(url: url))

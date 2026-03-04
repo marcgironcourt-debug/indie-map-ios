@@ -1,26 +1,71 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        ZStack {
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(color: Color(red: 0.06, green: 0.06, blue: 0.08), location: 0.0),
-                    .init(color: Color(red: 0.10, green: 0.08, blue: 0.06), location: 0.55),
-                    .init(color: Color(red: 0.05, green: 0.05, blue: 0.06), location: 1.0),
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+  @AppStorage("im_locale") private var locale = ""
 
-            #if DEBUG
-            WebView(urlString: "http://localhost:3010/fr")
-                .ignoresSafeArea()
-            #else
-            WebView(urlString: "https://indie-map.vercel.app/fr")
-                .ignoresSafeArea()
-            #endif
-}
+  private var baseURL: String {
+    #if targetEnvironment(simulator)
+    return "http://192.168.2.41:3010"
+    #else
+    return "https://indie-map.vercel.app"
+    #endif
+  }
+
+  private var initialURL: String {
+    let l = (locale == "en" || locale == "fr") ? locale : "fr"
+    return "\(baseURL)/\(l)"
+  }
+
+  var body: some View {
+    ZStack {
+      Color(red: 0.3607843137, green: 0.4313725490, blue: 0.2313725490)
+        .ignoresSafeArea()
+
+      if locale == "en" || locale == "fr" {
+        WebView(urlString: initialURL)
+          .ignoresSafeArea()
+      } else {
+        VStack(spacing: 14) {
+          Spacer()
+          Text("Indie Map")
+            .font(.system(size: 36, weight: .semibold))
+            .foregroundColor(.white)
+
+          Text("Back To Local")
+            .font(.system(size: 14, weight: .regular))
+            .foregroundColor(Color.white.opacity(0.8))
+
+          Spacer()
+
+          VStack(spacing: 12) {
+            Button {
+              locale = "fr"
+            } label: {
+              Text("Français")
+                .font(.system(size: 18, weight: .semibold))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(Color.white.opacity(0.18))
+                .foregroundColor(.white)
+                .cornerRadius(16)
+            }
+
+            Button {
+              locale = "en"
+            } label: {
+              Text("English")
+                .font(.system(size: 18, weight: .semibold))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(Color.white.opacity(0.18))
+                .foregroundColor(.white)
+                .cornerRadius(16)
+            }
+          }
+          .padding(.horizontal, 24)
+          .padding(.bottom, 34)
+        }
+      }
     }
+  }
 }

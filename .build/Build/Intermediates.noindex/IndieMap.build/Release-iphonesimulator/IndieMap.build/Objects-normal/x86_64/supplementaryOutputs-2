@@ -1,0 +1,12 @@
+{
+  "/Users/marcos/dev/indie-map-ios/Sources/IndieMap/ContentView.swift" : {
+    "abi-baseline-json" : "/Users/marcos/dev/indie-map-ios/.build/Build/Intermediates.noindex/IndieMap.build/Release-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap.abi.json",
+    "const-values" : "/Users/marcos/dev/indie-map-ios/.build/Build/Intermediates.noindex/IndieMap.build/Release-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-primary.swiftconstvalues",
+    "dependencies" : "/Users/marcos/dev/indie-map-ios/.build/Build/Intermediates.noindex/IndieMap.build/Release-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-primary.d",
+    "diagnostics" : "/Users/marcos/dev/indie-map-ios/.build/Build/Intermediates.noindex/IndieMap.build/Release-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-primary.dia",
+    "objc-header" : "/Users/marcos/dev/indie-map-ios/.build/Build/Intermediates.noindex/IndieMap.build/Release-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-Swift.h",
+    "swiftdoc" : "/Users/marcos/dev/indie-map-ios/.build/Build/Intermediates.noindex/IndieMap.build/Release-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap.swiftdoc",
+    "swiftmodule" : "/Users/marcos/dev/indie-map-ios/.build/Build/Intermediates.noindex/IndieMap.build/Release-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap.swiftmodule",
+    "swiftsourceinfo" : "/Users/marcos/dev/indie-map-ios/.build/Build/Intermediates.noindex/IndieMap.build/Release-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap.swiftsourceinfo"
+  }
+}

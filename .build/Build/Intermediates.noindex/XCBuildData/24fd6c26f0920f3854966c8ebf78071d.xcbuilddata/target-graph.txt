@@ -1,0 +1,2 @@
+Target dependency graph (1 target)
+Target 'IndieMap' in project 'IndieMap' (no dependencies)
