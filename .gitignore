@@ -1,2 +1,5 @@
-.certs/
-IndieMap.xcodeproj/project.xcworkspace/xcuserdata/
+.build/
+*.xcactivitylog
+*.xccheckout
+xcuserdata/
+DerivedData/
