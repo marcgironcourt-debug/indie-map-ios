@@ -18,7 +18,7 @@ struct ContentView: View {
 
   var body: some View {
     ZStack {
-      Color(red: 0.3607843137, green: 0.4313725490, blue: 0.2313725490)
+      Color(red: 0.4784313725, green: 0.4352941176, blue: 0.1647058824)
         .ignoresSafeArea()
 
       if locale == "en" || locale == "fr" {
