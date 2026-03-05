@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>12</integer>
+	<key>logs</key>
+	<dict>
+		<key>357A08C3-84D2-44B4-85D2-A0256F646D84</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>357A08C3-84D2-44B4-85D2-A0256F646D84.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>IndieMap project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>IndieMap</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Cleaning project IndieMap with scheme IndieMap and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>794420244.84179902</real>
+			<key>timeStoppedRecording</key>
+			<real>794420244.99860704</real>
+			<key>title</key>
+			<string>Cleaning project IndieMap with scheme IndieMap and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>357A08C3-84D2-44B4-85D2-A0256F646D84</string>
+		</dict>
+		<key>ACE6C48E-DF2F-4CDC-88A1-84B895B778CC</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>ACE6C48E-DF2F-4CDC-88A1-84B895B778CC.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>IndieMap project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>IndieMap</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Cleaning project IndieMap with scheme IndieMap and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>794420561.67950499</real>
+			<key>timeStoppedRecording</key>
+			<real>794420561.84823704</real>
+			<key>title</key>
+			<string>Cleaning project IndieMap with scheme IndieMap and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>ACE6C48E-DF2F-4CDC-88A1-84B895B778CC</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,49 @@
+{
+  "" : {
+    "diagnostics" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-primary.dia",
+    "emit-module-dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-primary-emit-module.dia",
+    "pch" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMap-primary.swiftdeps"
+  },
+  "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/GeneratedAssetSymbols~partial.swiftmodule"
+  },
+  "/Users/marcos/dev/indie-map-ios/Sources/IndieMap/ContentView.swift" : {
+    "const-values" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/ContentView.d",
+    "diagnostics" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/ContentView.dia",
+    "index-unit-output-path" : "/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/ContentView.o",
+    "llvm-bc" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/ContentView.bc",
+    "object" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/ContentView.o",
+    "swift-dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/ContentView~partial.swiftmodule"
+  },
+  "/Users/marcos/dev/indie-map-ios/Sources/IndieMap/IndieMapApp.swift" : {
+    "const-values" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMapApp.swiftconstvalues",
+    "dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMapApp.d",
+    "diagnostics" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMapApp.dia",
+    "index-unit-output-path" : "/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMapApp.o",
+    "llvm-bc" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMapApp.bc",
+    "object" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMapApp.o",
+    "swift-dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMapApp.swiftdeps",
+    "swiftmodule" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/IndieMapApp~partial.swiftmodule"
+  },
+  "/Users/marcos/dev/indie-map-ios/Sources/IndieMap/WebView.swift" : {
+    "const-values" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/WebView.swiftconstvalues",
+    "dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/WebView.d",
+    "diagnostics" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/WebView.dia",
+    "index-unit-output-path" : "/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/WebView.o",
+    "llvm-bc" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/WebView.bc",
+    "object" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/WebView.o",
+    "swift-dependencies" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/WebView.swiftdeps",
+    "swiftmodule" : "/Users/marcos/dev/indie-map-ios/.derived/Build/Intermediates.noindex/IndieMap.build/Debug-iphonesimulator/IndieMap.build/Objects-normal/x86_64/WebView~partial.swiftmodule"
+  }
+}

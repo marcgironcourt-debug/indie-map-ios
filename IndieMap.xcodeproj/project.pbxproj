@@ -10,6 +10,7 @@
 		0B0A1F8031E44430CA92FC17 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584495833A628E70EBE90199 /* WebView.swift */; };
 		15EF39C6241154DE56ED3938 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE825C87526E7BDBC9530B /* ContentView.swift */; };
 		17DA744C9E74EBF686C4945F /* IndieMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C37C9C9B2B01AC1E04440 /* IndieMapApp.swift */; };
+			415EC08303FADD0869F5E00B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3502250663E1D142F73AD9 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,7 @@
 		7750C8A3FDAEDE87C9F64090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95BE825C87526E7BDBC9530B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EB0C37C9C9B2B01AC1E04440 /* IndieMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndieMapApp.swift; sourceTree = "<group>"; };
+			4E3502250663E1D142F73AD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sources/IndieMap/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -57,6 +59,7 @@
 			buildConfigurationList = 06D40C392DED3252AC047BD8 /* Build configuration list for PBXNativeTarget "IndieMap" */;
 			buildPhases = (
 				AB330259A9A4A2614124D916 /* Sources */,
+				4F667A0AB24B53DCA4CD9739 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -109,6 +112,17 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXResourcesBuildPhase section */
+			4F667A0AB24B53DCA4CD9739 /* Resources */ = {
+				isa = PBXResourcesBuildPhase;
+				buildActionMask = 2147483647;
+				files = (
+					415EC08303FADD0869F5E00B /* Assets.xcassets in Resources */,
+				);
+				runOnlyForDeploymentPostprocessing = 0;
+			};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin XCBuildConfiguration section */
 		2487C45CB127F5105D25FD28 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -120,6 +134,7 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					4E3502250663E1D142F73AD9 /* Assets.xcassets */,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.indiemap.app;
 				SDKROOT = iphoneos;
