@@ -4,11 +4,7 @@ struct ContentView: View {
   @AppStorage("im_locale") private var locale = ""
 
   private var baseURL: String {
-    #if targetEnvironment(simulator)
-    return "http://192.168.2.41:3010"
-    #else
     return "https://indie-map.vercel.app"
-    #endif
   }
 
   private var initialURL: String {
