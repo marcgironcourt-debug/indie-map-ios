@@ -17,8 +17,9 @@ final class NavigationChooserViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Itinéraire"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Annuler", style: .done, target: self, action: #selector(close))
+        let isFr = (UserDefaults.standard.string(forKey: "im_locale") ?? "fr") == "fr"
+        title = isFr ? "Itinéraire" : "Directions"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: isFr ? "Annuler" : "Cancel", style: .done, target: self, action: #selector(close))
     }
 
     @objc private func close() {
@@ -187,7 +188,8 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
             let lng = parsed.lng
             let query = parsed.query
 
-            var actions: [(String, URL)] = [("Plans", appleURL)]
+            let isFr = (UserDefaults.standard.string(forKey: "im_locale") ?? "fr") == "fr"
+            var actions: [(String, URL)] = [(isFr ? "Plans" : "Maps", appleURL)]
 
             if let q = query, !q.isEmpty {
                 if let u = URL(string: "comgooglemaps://?daddr=" + (q.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")),

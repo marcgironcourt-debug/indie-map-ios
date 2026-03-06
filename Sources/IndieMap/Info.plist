@@ -21,8 +21,6 @@
 		<string>fr</string>
 		<string>en</string>
 	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Indie Map utilise votre position pour vous montrer les lieux près de vous.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Indie Map utilise votre position pour afficher les lieux autour de vous.</string>
 	<key>UILaunchScreen</key>
