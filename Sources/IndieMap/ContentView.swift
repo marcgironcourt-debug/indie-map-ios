@@ -14,7 +14,7 @@ struct ContentView: View {
 
   var body: some View {
     ZStack {
-      Color(red: 0.4784313725, green: 0.4352941176, blue: 0.1647058824)
+      Color(red: 111/255, green: 101/255, blue: 40/255)
         .ignoresSafeArea()
 
       if locale == "en" || locale == "fr" {
@@ -23,13 +23,52 @@ struct ContentView: View {
       } else {
         VStack(spacing: 14) {
           Spacer()
+
+          Image("Logo")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 120, height: 120)
+
           Text("Indie Map")
-            .font(.system(size: 36, weight: .semibold))
+            .font(.system(size: 52, weight: .semibold))
             .foregroundColor(.white)
 
-          Text("Back To Local")
-            .font(.system(size: 14, weight: .regular))
-            .foregroundColor(Color.white.opacity(0.8))
+          ZStack {
+            Text("Back To Local")
+              .font(.system(size: 20, weight: .regular))
+              .italic()
+              .kerning(2.6)
+              .foregroundColor(.white)
+              .offset(x: -0.8, y: -0.8)
+
+            Text("Back To Local")
+              .font(.system(size: 20, weight: .regular))
+              .italic()
+              .kerning(2.6)
+              .foregroundColor(.white)
+              .offset(x: 0.8, y: -0.8)
+
+            Text("Back To Local")
+              .font(.system(size: 20, weight: .regular))
+              .italic()
+              .kerning(2.6)
+              .foregroundColor(.white)
+              .offset(x: -0.8, y: 0.8)
+
+            Text("Back To Local")
+              .font(.system(size: 20, weight: .regular))
+              .italic()
+              .kerning(2.6)
+              .foregroundColor(.white)
+              .offset(x: 0.8, y: 0.8)
+
+            Text("Back To Local")
+              .font(.system(size: 20, weight: .regular))
+              .italic()
+              .kerning(2.6)
+              .foregroundColor(Color(red: 92/255, green: 110/255, blue: 59/255))
+          }
+            .rotationEffect(.degrees(-2))
 
           Spacer()
 
