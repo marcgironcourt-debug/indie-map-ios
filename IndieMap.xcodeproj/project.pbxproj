@@ -3,23 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0B0A1F8031E44430CA92FC17 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584495833A628E70EBE90199 /* WebView.swift */; };
 		15EF39C6241154DE56ED3938 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE825C87526E7BDBC9530B /* ContentView.swift */; };
 		17DA744C9E74EBF686C4945F /* IndieMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C37C9C9B2B01AC1E04440 /* IndieMapApp.swift */; };
-			415EC08303FADD0869F5E00B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3502250663E1D142F73AD9 /* Assets.xcassets */; };
+		6AA7172327D83EB14CC7BC2C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AE384028433CA6007EEFAB2 /* InfoPlist.strings */; };
+		6ABC01060E8639D4AB091F12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7BCD3FA6555E819739B1E1F /* LaunchScreen.storyboard */; };
+		B0B3CA731153879001474CC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBC1E885D58D89A781148EB /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C83A50AE07BECD3E2B322A6 /* IndieMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndieMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C83A50AE07BECD3E2B322A6 /* IndieMap.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = IndieMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E33850351C2D73C078B4865 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45ABA6C507CCF68FEF9DC409 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		584495833A628E70EBE90199 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		7750C8A3FDAEDE87C9F64090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95BE825C87526E7BDBC9530B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B7BCD3FA6555E819739B1E1F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BDBC1E885D58D89A781148EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB0C37C9C9B2B01AC1E04440 /* IndieMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndieMapApp.swift; sourceTree = "<group>"; };
-			4E3502250663E1D142F73AD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sources/IndieMap/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -34,9 +39,12 @@
 		44119F694C281B2C9BF4C9F0 /* IndieMap */ = {
 			isa = PBXGroup;
 			children = (
+				BDBC1E885D58D89A781148EB /* Assets.xcassets */,
 				95BE825C87526E7BDBC9530B /* ContentView.swift */,
 				EB0C37C9C9B2B01AC1E04440 /* IndieMapApp.swift */,
 				7750C8A3FDAEDE87C9F64090 /* Info.plist */,
+				6AE384028433CA6007EEFAB2 /* InfoPlist.strings */,
+				B7BCD3FA6555E819739B1E1F /* LaunchScreen.storyboard */,
 				584495833A628E70EBE90199 /* WebView.swift */,
 			);
 			name = IndieMap;
@@ -59,7 +67,7 @@
 			buildConfigurationList = 06D40C392DED3252AC047BD8 /* Build configuration list for PBXNativeTarget "IndieMap" */;
 			buildPhases = (
 				AB330259A9A4A2614124D916 /* Sources */,
-				4F667A0AB24B53DCA4CD9739 /* Resources */,
+				1CAB43ADE3BF8455042FBFD8 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -79,7 +87,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 1430;
 			};
 			buildConfigurationList = BE00B8BF72C0BD3EF83CAE72 /* Build configuration list for PBXProject "IndieMap" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -88,9 +96,11 @@
 			knownRegions = (
 				Base,
 				en,
+				fr,
 			);
 			mainGroup = BD86DDB5E0DD677DF8356459;
 			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -98,6 +108,19 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1CAB43ADE3BF8455042FBFD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0B3CA731153879001474CC6 /* Assets.xcassets in Resources */,
+				6AA7172327D83EB14CC7BC2C /* InfoPlist.strings in Resources */,
+				6ABC01060E8639D4AB091F12 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB330259A9A4A2614124D916 /* Sources */ = {
@@ -112,16 +135,17 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXResourcesBuildPhase section */
-			4F667A0AB24B53DCA4CD9739 /* Resources */ = {
-				isa = PBXResourcesBuildPhase;
-				buildActionMask = 2147483647;
-				files = (
-					415EC08303FADD0869F5E00B /* Assets.xcassets in Resources */,
-				);
-				runOnlyForDeploymentPostprocessing = 0;
-			};
-/* End PBXResourcesBuildPhase section */
+/* Begin PBXVariantGroup section */
+		6AE384028433CA6007EEFAB2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E33850351C2D73C078B4865 /* en */,
+				45ABA6C507CCF68FEF9DC409 /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2487C45CB127F5105D25FD28 /* Release */ = {
@@ -129,12 +153,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = UM634366MM;
 				INFOPLIST_FILE = Sources/IndieMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					4E3502250663E1D142F73AD9 /* Assets.xcassets */,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.indiemap.app;
 				SDKROOT = iphoneos;
@@ -179,7 +201,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -193,7 +214,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -205,7 +225,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = UM634366MM;
 				INFOPLIST_FILE = Sources/IndieMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -254,7 +273,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -275,7 +293,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
