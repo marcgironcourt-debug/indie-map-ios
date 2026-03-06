@@ -48,19 +48,71 @@ final class NavigationChooserViewController: UITableViewController {
 final class GeoPermission: NSObject, CLLocationManagerDelegate {
     static let shared = GeoPermission()
     private let manager = CLLocationManager()
+    private weak var webView: WKWebView?
     private var didRequest = false
+    private var didSendInitialLocation = false
 
     private override init() {
         super.init()
         manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+
+    func attach(webView: WKWebView) {
+        self.webView = webView
     }
 
     func ensureAuthorized() {
+        let status = manager.authorizationStatus
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
+            requestNativeLocation()
+            return
+        }
         if didRequest { return }
         didRequest = true
-        let status = manager.authorizationStatus
         if status == .notDetermined {
             manager.requestWhenInUseAuthorization()
+        }
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = manager.authorizationStatus
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
+            requestNativeLocation()
+        }
+    }
+
+    func requestNativeLocation() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.manager.requestLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let loc = locations.last else { return }
+        if didSendInitialLocation { return }
+        didSendInitialLocation = true
+        syncToWebView(lat: loc.coordinate.latitude, lng: loc.coordinate.longitude)
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("GeoPermission didFailWithError:", error.localizedDescription)
+    }
+
+    func syncToWebView(lat: Double, lng: Double) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { [weak self] in
+            guard let webView = self?.webView else { return }
+            let js = """
+            (function(){
+              try{
+                window.dispatchEvent(new CustomEvent("im:native-location", {
+                  detail: { lat: \(lat), lng: \(lng) }
+                }));
+              }catch(e){}
+            })();
+            """
+            webView.evaluateJavaScript(js, completionHandler: nil)
         }
     }
 }
@@ -228,6 +280,7 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("WKWebView didFinish:", webView.url?.absoluteString ?? "<nil>")
+            GeoPermission.shared.ensureAuthorized()
         }
 
         func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
@@ -241,7 +294,6 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
         func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
             print("WKWebView webContentProcessDidTerminate")
         }
-
 
         func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
             guard let root = UIApplication.shared.connectedScenes
@@ -268,7 +320,6 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
     }
 
     func makeUIView(context: Context) -> WKWebView {
-        GeoPermission.shared.ensureAuthorized()
         let config = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
         let js = """
@@ -305,6 +356,7 @@ try{send("unhandledrejection",[String(e.reason)]);}catch(err){}
         userContentController.add(context.coordinator, name: "imlog")
         config.userContentController = userContentController
         let webView = WKWebView(frame: .zero, configuration: config)
+        GeoPermission.shared.attach(webView: webView)
 
         webView.uiDelegate = context.coordinator
         webView.navigationDelegate = context.coordinator
