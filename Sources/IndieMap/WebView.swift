@@ -127,9 +127,16 @@ final class GeoPermission: NSObject, CLLocationManagerDelegate {
 
 struct WebView: UIViewRepresentable {
     let urlString: String
+    let onReady: () -> Void
 
     
 final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+        let onReady: () -> Void
+
+        init(onReady: @escaping () -> Void) {
+            self.onReady = onReady
+            super.init()
+        }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             guard message.name == "imlog" else { return }
@@ -291,6 +298,9 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
             if let loc = GeoPermission.shared.manager.location {
                 GeoPermission.shared.syncToWebView(lat: loc.coordinate.latitude, lng: loc.coordinate.longitude)
             }
+            DispatchQueue.main.async { [weak self] in
+                self?.onReady()
+            }
         }
 
         func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
@@ -326,7 +336,7 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(onReady: onReady)
     }
 
     func makeUIView(context: Context) -> WKWebView {
