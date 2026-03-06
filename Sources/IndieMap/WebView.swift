@@ -70,7 +70,12 @@ struct WebView: UIViewRepresentable {
     let urlString: String
 
     
-final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
+final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            guard message.name == "imlog" else { return }
+            print("[IM_WEB]", String(describing: message.body))
+        }
 
         private func topController() -> UIViewController? {
             UIApplication.shared.connectedScenes
@@ -265,6 +270,40 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
     func makeUIView(context: Context) -> WKWebView {
         GeoPermission.shared.ensureAuthorized()
         let config = WKWebViewConfiguration()
+        let userContentController = WKUserContentController()
+        let js = """
+(function(){
+try{
+if(window.__IM_LOG_BRIDGE__)return;
+window.__IM_LOG_BRIDGE__=true;
+function send(kind,args){
+try{
+var out=[];
+for(var i=0;i<args.length;i++){
+try{var v=args[i];out.push(typeof v==="string"?v:JSON.stringify(v));}
+catch(e){out.push(String(args[i]));}
+}
+window.webkit.messageHandlers.imlog.postMessage("["+kind+"] "+out.join(" "));
+}catch(e){}
+}
+var _log=console.log?console.log.bind(console):function(){};
+var _warn=console.warn?console.warn.bind(console):function(){};
+var _error=console.error?console.error.bind(console):function(){};
+console.log=function(){send("log",arguments);_log.apply(console,arguments);};
+console.warn=function(){send("warn",arguments);_warn.apply(console,arguments);};
+console.error=function(){send("error",arguments);_error.apply(console,arguments);};
+window.addEventListener("error",function(e){
+try{send("window.error",[e.message,e.filename,e.lineno+":"+e.colno]);}catch(err){}
+});
+window.addEventListener("unhandledrejection",function(e){
+try{send("unhandledrejection",[String(e.reason)]);}catch(err){}
+});
+}catch(e){}
+})();
+"""
+        userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: false))
+        userContentController.add(context.coordinator, name: "imlog")
+        config.userContentController = userContentController
         let webView = WKWebView(frame: .zero, configuration: config)
 
         webView.uiDelegate = context.coordinator
