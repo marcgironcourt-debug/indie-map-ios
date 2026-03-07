@@ -88,6 +88,12 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					1DF4AF4B0911309988F4378C = {
+						DevelopmentTeam = AF2KXN5H2P;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = BE00B8BF72C0BD3EF83CAE72 /* Build configuration list for PBXProject "IndieMap" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -153,6 +159,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AF2KXN5H2P;
 				INFOPLIST_FILE = Sources/IndieMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -225,6 +233,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AF2KXN5H2P;
 				INFOPLIST_FILE = Sources/IndieMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -14,6 +14,8 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.indiemap.app
+        DEVELOPMENT_TEAM: AF2KXN5H2P
+        CODE_SIGN_STYLE: Automatic
         INFOPLIST_FILE: Sources/IndieMap/Info.plist
 schemes:
   IndieMap:
