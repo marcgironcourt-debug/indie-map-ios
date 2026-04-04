@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0B0A1F8031E44430CA92FC17 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584495833A628E70EBE90199 /* WebView.swift */; };
+		0E5B8A5F3F0265F45CFD66AA /* NotificationBannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D346E8C961E85EE7E337E5 /* NotificationBannerManager.swift */; };
 		15EF39C6241154DE56ED3938 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE825C87526E7BDBC9530B /* ContentView.swift */; };
 		17DA744C9E74EBF686C4945F /* IndieMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C37C9C9B2B01AC1E04440 /* IndieMapApp.swift */; };
 		6AA7172327D83EB14CC7BC2C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AE384028433CA6007EEFAB2 /* InfoPlist.strings */; };
 		6ABC01060E8639D4AB091F12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7BCD3FA6555E819739B1E1F /* LaunchScreen.storyboard */; };
 		B0B3CA731153879001474CC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBC1E885D58D89A781148EB /* Assets.xcassets */; };
+		D0D71562DE6D3417FF16F0FF /* NotificationSettingsBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD04FFAC628CE56EABCD07E4 /* NotificationSettingsBanner.swift */; };
+		ED33D05EA26BA33ADA58A2A1 /* NotificationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E964A214D40F462A290B9A /* NotificationPermission.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,9 +25,13 @@
 		584495833A628E70EBE90199 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		7750C8A3FDAEDE87C9F64090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95BE825C87526E7BDBC9530B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AD04FFAC628CE56EABCD07E4 /* NotificationSettingsBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsBanner.swift; sourceTree = "<group>"; };
+		B6E964A214D40F462A290B9A /* NotificationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermission.swift; sourceTree = "<group>"; };
 		B7BCD3FA6555E819739B1E1F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDBC1E885D58D89A781148EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D6D346E8C961E85EE7E337E5 /* NotificationBannerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBannerManager.swift; sourceTree = "<group>"; };
 		EB0C37C9C9B2B01AC1E04440 /* IndieMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndieMapApp.swift; sourceTree = "<group>"; };
+		F3FB83F5007B2C67CCE55101 /* IndieMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IndieMap.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -41,10 +48,14 @@
 			children = (
 				BDBC1E885D58D89A781148EB /* Assets.xcassets */,
 				95BE825C87526E7BDBC9530B /* ContentView.swift */,
+				F3FB83F5007B2C67CCE55101 /* IndieMap.entitlements */,
 				EB0C37C9C9B2B01AC1E04440 /* IndieMapApp.swift */,
 				7750C8A3FDAEDE87C9F64090 /* Info.plist */,
 				6AE384028433CA6007EEFAB2 /* InfoPlist.strings */,
 				B7BCD3FA6555E819739B1E1F /* LaunchScreen.storyboard */,
+				D6D346E8C961E85EE7E337E5 /* NotificationBannerManager.swift */,
+				B6E964A214D40F462A290B9A /* NotificationPermission.swift */,
+				AD04FFAC628CE56EABCD07E4 /* NotificationSettingsBanner.swift */,
 				584495833A628E70EBE90199 /* WebView.swift */,
 			);
 			name = IndieMap;
@@ -133,6 +144,9 @@
 			files = (
 				15EF39C6241154DE56ED3938 /* ContentView.swift in Sources */,
 				17DA744C9E74EBF686C4945F /* IndieMapApp.swift in Sources */,
+				0E5B8A5F3F0265F45CFD66AA /* NotificationBannerManager.swift in Sources */,
+				ED33D05EA26BA33ADA58A2A1 /* NotificationPermission.swift in Sources */,
+				D0D71562DE6D3417FF16F0FF /* NotificationSettingsBanner.swift in Sources */,
 				0B0A1F8031E44430CA92FC17 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,9 +170,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sources/IndieMap/IndieMap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UM634366MM;
+				DEVELOPMENT_TEAM = 6N82MRRWFW;
 				INFOPLIST_FILE = Sources/IndieMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -230,9 +245,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sources/IndieMap/IndieMap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UM634366MM;
+				DEVELOPMENT_TEAM = 6N82MRRWFW;
 				INFOPLIST_FILE = Sources/IndieMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

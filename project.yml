@@ -11,6 +11,10 @@ targets:
     platform: iOS
     sources:
       - path: Sources/IndieMap
+    entitlements:
+      path: Sources/IndieMap/IndieMap.entitlements
+      properties:
+        aps-environment: development
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.indiemap.app

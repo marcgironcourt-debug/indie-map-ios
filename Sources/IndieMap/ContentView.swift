@@ -95,9 +95,11 @@ struct ContentView: View {
   @AppStorage("im_locale") private var locale = ""
   @State private var webViewReady = false
   @State private var minimumSplashElapsed = false
+  @State private var showNotificationSettingsBanner = false
+  @State private var didTriggerNotificationRequest = false
 
   private var baseURL: String {
-    return "https://indie-map.vercel.app"
+    return "https://indie-iu5eru05o-marcgironcourt-debugs-projects.vercel.app"
   }
 
   private var initialURL: String {
@@ -148,10 +150,29 @@ struct ContentView: View {
         )
         .ignoresSafeArea()
       }
+
+      if showNotificationSettingsBanner && !shouldShowSplashOverlay {
+        VStack {
+          NotificationSettingsBanner {
+            showNotificationSettingsBanner = false
+          }
+          Spacer()
+        }
+        .ignoresSafeArea(edges: .top)
+      }
     }
     .onAppear {
       if hasLocale {
         startLaunchSequence()
+      }
+
+      Task {
+        await NotificationPermission.shared.refreshStatus()
+        let denied = NotificationPermission.shared.status == .denied
+        let shouldShow = NotificationBannerManager.shared.shouldShowBanner()
+        await MainActor.run {
+          showNotificationSettingsBanner = denied && shouldShow
+        }
       }
     }
     .onChange(of: locale) { _, newValue in
@@ -160,6 +181,24 @@ struct ContentView: View {
       } else {
         webViewReady = false
         minimumSplashElapsed = false
+      }
+    }
+    .onChange(of: shouldShowSplashOverlay) { _, hidden in
+      if hidden { return }
+      if didTriggerNotificationRequest { return }
+
+      Task {
+        await NotificationPermission.shared.refreshStatus()
+        if NotificationPermission.shared.status == .notDetermined {
+          didTriggerNotificationRequest = true
+          _ = await NotificationPermission.shared.requestPermission()
+          await NotificationPermission.shared.refreshStatus()
+          let denied = NotificationPermission.shared.status == .denied
+          let shouldShow = NotificationBannerManager.shared.shouldShowBanner()
+          await MainActor.run {
+            showNotificationSettingsBanner = denied && shouldShow
+          }
+        }
       }
     }
   }
