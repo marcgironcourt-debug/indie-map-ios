@@ -8,7 +8,7 @@ struct BrandSplashView: View {
   var body: some View {
     ZStack {
       Color(red: 111/255, green: 101/255, blue: 40/255)
-        .ignoresSafeArea()
+        .ignoresSafeArea(edges: .bottom)
 
       VStack(spacing: 14) {
         Spacer()
@@ -133,7 +133,7 @@ struct ContentView: View {
             webViewReady = true
           }
         )
-        .ignoresSafeArea()
+        .ignoresSafeArea(edges: .bottom)
       } else {
         BrandSplashView(
           showsLanguageButtons: true,
@@ -158,7 +158,7 @@ struct ContentView: View {
           }
           Spacer()
         }
-        .ignoresSafeArea(edges: .top)
+        .padding(.top, 6)
       }
     }
     .onAppear {
