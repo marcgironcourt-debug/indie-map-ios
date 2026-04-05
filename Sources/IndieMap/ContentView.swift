@@ -8,7 +8,7 @@ struct BrandSplashView: View {
   var body: some View {
     ZStack {
       Color(red: 111/255, green: 101/255, blue: 40/255)
-        .ignoresSafeArea(edges: .bottom)
+        .ignoresSafeArea()
 
       VStack(spacing: 14) {
         Spacer()
@@ -99,7 +99,7 @@ struct ContentView: View {
   @State private var didTriggerNotificationRequest = false
 
   private var baseURL: String {
-    return "https://indie-iu5eru05o-marcgironcourt-debugs-projects.vercel.app"
+    return "https://preview.marcgironcourt-debugs-projects.vercel.app"
   }
 
   private var initialURL: String {
@@ -133,7 +133,7 @@ struct ContentView: View {
             webViewReady = true
           }
         )
-        .ignoresSafeArea(edges: .bottom)
+        .ignoresSafeArea()
       } else {
         BrandSplashView(
           showsLanguageButtons: true,
