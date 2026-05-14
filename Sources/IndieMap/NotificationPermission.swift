@@ -26,10 +26,13 @@ final class NotificationPermission: NSObject, ObservableObject {
             status = .denied
         case .authorized:
             status = .authorized
+            UIApplication.shared.registerForRemoteNotifications()
         case .provisional:
             status = .provisional
+            UIApplication.shared.registerForRemoteNotifications()
         case .ephemeral:
             status = .ephemeral
+            UIApplication.shared.registerForRemoteNotifications()
         @unknown default:
             status = .unknown
         }

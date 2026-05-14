@@ -104,7 +104,7 @@ struct ContentView: View {
 
   private var initialURL: String {
     let l = (locale == "en" || locale == "fr") ? locale : "fr"
-    return "\(baseURL)/\(l)"
+    return "\(baseURL)/\(l)?v=20260405-ui-home-2"
   }
 
   private var hasLocale: Bool {

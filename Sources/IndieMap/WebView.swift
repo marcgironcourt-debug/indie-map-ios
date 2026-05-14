@@ -379,6 +379,7 @@ try{send("unhandledrejection",[String(e.reason)]);}catch(err){}
         config.userContentController = userContentController
         let webView = WKWebView(frame: .zero, configuration: config)
         GeoPermission.shared.attach(webView: webView)
+        PushTokenBridge.shared.attach(webView: webView)
         GeoPermission.shared.ensureAuthorized()
 
         webView.uiDelegate = context.coordinator
@@ -390,9 +391,16 @@ try{send("unhandledrejection",[String(e.reason)]);}catch(err){}
 
 
 guard let url = URL(string: urlString) else { return webView }
-        webView.load(URLRequest(url: url))
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
+        webView.load(request)
         return webView
     }
 
-    func updateUIView(_ uiView: WKWebView, context: Context) {}
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        guard let url = URL(string: urlString) else { return }
+        if uiView.url?.absoluteString != url.absoluteString {
+            let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
+            uiView.load(request)
+        }
+    }
 }
