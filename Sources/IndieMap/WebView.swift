@@ -300,6 +300,7 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
             if let loc = GeoPermission.shared.manager.location {
                 GeoPermission.shared.syncToWebView(lat: loc.coordinate.latitude, lng: loc.coordinate.longitude)
             }
+            PushTokenBridge.shared.consumePendingOpenUrlIfNeeded(currentUrl: webView.url?.absoluteString)
             DispatchQueue.main.async { [weak self] in
                 self?.onReady()
             }

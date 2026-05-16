@@ -16,9 +16,6 @@ final class PushTokenBridge {
         if let token = pendingToken {
             inject(token: token)
         }
-        if let url = pendingUrl {
-            injectOpenUrl(url)
-        }
     }
 
     func update(token: String) {
@@ -29,7 +26,38 @@ final class PushTokenBridge {
 
     func open(url: String) {
         pendingUrl = url
-        injectOpenUrl(url)
+        navigateToPendingUrlIfPossible()
+    }
+
+    func consumePendingOpenUrlIfNeeded(currentUrl: String?) {
+        guard let url = pendingUrl else { return }
+        if currentUrl == url {
+            pendingUrl = nil
+            return
+        }
+        navigateToPendingUrlIfPossible()
+    }
+
+    private func navigateToPendingUrlIfPossible() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            guard let urlString = self.pendingUrl else {
+                return
+            }
+            guard let webView = self.webView else {
+                return
+            }
+            guard let url = URL(string: urlString) else {
+                self.pendingUrl = nil
+                return
+            }
+            if webView.url?.absoluteString == urlString {
+                self.pendingUrl = nil
+                return
+            }
+            let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
+            webView.load(request)
+        }
     }
 
     private func inject(token: String) {
@@ -66,7 +94,18 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         UNUserNotificationCenter.current().delegate = self
+        if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable: Any] {
+            handleNotificationUserInfo(userInfo)
+        }
         return true
+    }
+
+    private func handleNotificationUserInfo(_ userInfo: [AnyHashable: Any]) {
+        let rawUrl = userInfo["url"] as? String
+        let url = rawUrl?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let url, !url.isEmpty {
+            PushTokenBridge.shared.open(url: url)
+        }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -89,14 +128,12 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
 
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
-        didReceive response: UNNotificationResponse
-    ) async {
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
         let userInfo = response.notification.request.content.userInfo
-        let rawUrl = userInfo["url"] as? String
-        let url = rawUrl?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let url, !url.isEmpty {
-            PushTokenBridge.shared.open(url: url)
-        }
+        handleNotificationUserInfo(userInfo)
+        completionHandler()
     }
 }
 
