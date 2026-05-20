@@ -99,12 +99,12 @@ struct ContentView: View {
   @State private var didTriggerNotificationRequest = false
 
   private var baseURL: String {
-    return "https://preview.marcgironcourt-debugs-projects.vercel.app"
+    return "https://app.indie-map.com"
   }
 
   private var initialURL: String {
     let l = (locale == "en" || locale == "fr") ? locale : "fr"
-    return "\(baseURL)/\(l)?v=20260405-ui-home-2"
+    return "\(baseURL)/\(l)?v=20260516-push-panel-fix"
   }
 
   private var hasLocale: Bool {

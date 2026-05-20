@@ -398,10 +398,9 @@ guard let url = URL(string: urlString) else { return webView }
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
+        guard uiView.url == nil else { return }
         guard let url = URL(string: urlString) else { return }
-        if uiView.url?.absoluteString != url.absoluteString {
-            let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
-            uiView.load(request)
-        }
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
+        uiView.load(request)
     }
 }
