@@ -375,7 +375,24 @@ try{send("unhandledrejection",[String(e.reason)]);}catch(err){}
 }catch(e){}
 })();
 """
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+        let nativeInfoJs = """
+(function(){
+try{
+window.__IM_NATIVE_APP__ = {
+platform: "ios",
+version: "\(appVersion)",
+build: "\(appBuild)"
+};
+window.dispatchEvent(new CustomEvent("im:native-app-ready", {
+detail: window.__IM_NATIVE_APP__
+}));
+}catch(e){}
+})();
+"""
         userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: false))
+        userContentController.addUserScript(WKUserScript(source: nativeInfoJs, injectionTime: .atDocumentStart, forMainFrameOnly: false))
         userContentController.add(context.coordinator, name: "imlog")
         config.userContentController = userContentController
         let webView = WKWebView(frame: .zero, configuration: config)
