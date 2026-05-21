@@ -294,6 +294,13 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
             decisionHandler(.allow)
         }
 
+        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+            print("WKWebView didCommit:", webView.url?.absoluteString ?? "<nil>")
+            DispatchQueue.main.async { [weak self] in
+                self?.onReady()
+            }
+        }
+
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("WKWebView didFinish:", webView.url?.absoluteString ?? "<nil>")
             PushTokenBridge.shared.consumePendingOpenUrlIfNeeded(currentUrl: webView.url?.absoluteString)
