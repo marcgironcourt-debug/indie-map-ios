@@ -296,13 +296,15 @@ final class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate, WKScriptM
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("WKWebView didFinish:", webView.url?.absoluteString ?? "<nil>")
-            GeoPermission.shared.ensureAuthorized()
-            if let loc = GeoPermission.shared.manager.location {
-                GeoPermission.shared.syncToWebView(lat: loc.coordinate.latitude, lng: loc.coordinate.longitude)
-            }
             PushTokenBridge.shared.consumePendingOpenUrlIfNeeded(currentUrl: webView.url?.absoluteString)
             DispatchQueue.main.async { [weak self] in
                 self?.onReady()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                GeoPermission.shared.ensureAuthorized()
+                if let loc = GeoPermission.shared.manager.location {
+                    GeoPermission.shared.syncToWebView(lat: loc.coordinate.latitude, lng: loc.coordinate.longitude)
+                }
             }
         }
 
@@ -398,7 +400,6 @@ detail: window.__IM_NATIVE_APP__
         let webView = WKWebView(frame: .zero, configuration: config)
         GeoPermission.shared.attach(webView: webView)
         PushTokenBridge.shared.attach(webView: webView)
-        GeoPermission.shared.ensureAuthorized()
 
         webView.uiDelegate = context.coordinator
         webView.navigationDelegate = context.coordinator
@@ -409,7 +410,7 @@ detail: window.__IM_NATIVE_APP__
 
 
 guard let url = URL(string: urlString) else { return webView }
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
+        let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 15)
         webView.load(request)
         return webView
     }
@@ -417,7 +418,7 @@ guard let url = URL(string: urlString) else { return webView }
     func updateUIView(_ uiView: WKWebView, context: Context) {
         guard uiView.url == nil else { return }
         guard let url = URL(string: urlString) else { return }
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
+        let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 15)
         uiView.load(request)
     }
 }
